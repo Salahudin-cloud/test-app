@@ -12,8 +12,5 @@ class MahasiswaModel extends Model
     protected $fillable = ['nama', 'semester', 'prodi'];
     public $timestamps = true;
 
-    public function newMahasiswa($data)
-    {
-        MahasiswaModel::create($data);
-    }
+    
 }

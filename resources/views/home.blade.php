@@ -10,7 +10,7 @@
     <title>Jumbotron example · Bootstrap v5.0</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
-
+    <script src="https://kit.fontawesome.com/34ab9dca21.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 
@@ -25,13 +25,14 @@
             <a href="<?php echo url('mahasiswa/tambah'); ?>">
                 <button class="btn btn-success">Tambah Mahasiswa </button>
             </a>
-            <table class="table">
+            <table class="table table-border">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">nama</th>
                         <th scope="col">semester</th>
                         <th scope="col">prodi</th>
+                        <th class="col">action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,18 @@
                             <td> {{ $item->nama }} </td>
                             <td> {{ $item->semester }} </td>
                             <td> {{ $item->prodi }} </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ url('mahasiswa/edit', $item->id) }}" class="btn btn-warning me-2"><i
+                                            class="fa-solid fa-file-pen "></i></a>
+                                    <form action="{{ url('mahasiswa/proses/delete', $item->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger me-2"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

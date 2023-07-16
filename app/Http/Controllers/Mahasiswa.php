@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Psr7\Query;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class Mahasiswa extends Controller
 {
@@ -45,5 +46,30 @@ class Mahasiswa extends Controller
         $query = \App\Models\MahasiswaModel::all();
 
         return view('/home', ['mahasiswa' => $query]);
+    }
+
+    public function deleteMahasiswa($id)
+    {
+        $mahasiswaModel = \App\Models\MahasiswaModel::find($id)->delete();
+
+        return redirect('home');
+    }
+
+    public function editViewMahasiswa($id)
+    {
+        $query = \App\Models\MahasiswaModel::where('id', $id)->first();
+        return view('edit', ['mahasiswa' => $query]);
+    }
+
+    public function editMahasiswa(Request $request, $id): RedirectResponse
+    {
+        $query = \App\Models\MahasiswaModel::where('id', $id)->update([
+            'nama' => $request->input('nama'),
+            'semester' => $request->input('semester'),
+            'prodi' => $request->input('prodi'),
+        ]);
+
+        // redirect to home 
+        return redirect('home');
     }
 }

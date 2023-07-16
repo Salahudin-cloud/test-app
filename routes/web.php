@@ -21,3 +21,6 @@ Route::get('/home', [Mahasiswa::class, 'allMahasiswa']);
 
 Route::get('mahasiswa/tambah', [Mahasiswa::class, 'index']);
 Route::post('mahasiswa/tambah/proses', [Mahasiswa::class, 'tambahMahasiswa']);
+Route::delete('mahasiswa/proses/delete/{id} ', [Mahasiswa::class, 'deleteMahasiswa']);
+Route::get('mahasiswa/edit/{id}', [Mahasiswa::class, 'editViewMahasiswa']);
+Route::put('mahasiswa/proses/edit/{id}', [Mahasiswa::class, 'editMahasiswa']);
